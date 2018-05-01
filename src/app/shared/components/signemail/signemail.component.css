@@ -1,0 +1,14 @@
+.card{
+  position: center;
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px;
+}
+.form-control{width: 75%;position: center;
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px;}
+.btn-outline-primary{width: 50%; position: center;
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px;}
