@@ -1,0 +1,25 @@
+<div *ngIf="!authService.isAdmin"><br><br><h1 id="id1">Access denied</h1></div>
+<div *ngIf="authService.isAdmin">
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 order-md-1"><h4 class="mb-3">Adding a catagory</h4>
+      <form class="needs-validation" novalidate (ngSubmit)="onSubmit()" class="col s6">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>New catagory name</label>
+            <input type="text" class="form-control" placeholder="Add Category" [(ngModel)]="Category.title"
+                   name="title">
+            <div class="invalid-feedback">
+              Valid New catagory is required.
+            </div>
+          </div>
+        </div>
+
+        <hr class="mb-4">
+        <input class="btn btn-outline-primary" type="submit" value="Submit">
+        <hr class="mb-4">
+      </form>
+    </div>
+  </div>
+</div>
+</div>

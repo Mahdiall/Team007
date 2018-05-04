@@ -1,0 +1,136 @@
+<ul>
+  <tr *ngFor="let person of products; let i = index">
+
+    <td>
+      Title - {{ person.title }} </td> <td>Type - {{ person.type }} </td>  <td>Price - {{ person.price }} </td> <td> Description - {{ person.description }} </td> <td>{{person.photo}} </td>
+  </tr>
+</ul>
+
+<div *ngIf="!authService.isAdmin"><br><br><h1 id="id1">Access denied</h1></div>
+<div *ngIf="authService.isAdmin">
+<div class="container">
+
+
+
+    <div class="row">
+
+      <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Adding a product</h4>
+        <form class="needs-validation" novalidate>
+          <label for="file">File:</label>
+          <input type="file" [(ngModel)]="photo" name="photo" (change)="upload($event)" accept=".png,.jpg">
+          <br>
+          <br>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName">Product name</label>
+              <input type="text" class="form-control" [(ngModel)]="title" name="title" placeholder="Enter the title">
+              <div class="invalid-feedback">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="Image-URL">Quantity</label>
+
+              <input type="text" class="form-control" placeholder="Enter the amount in stock">
+              <div class="invalid-feedback">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="price">Product price</label>
+              <input type="number" class="form-control" [(ngModel)]="price" name="price" placeholder="Enter the price" >
+              <div class="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5 mb-3">
+              <label for="Category">Category</label>
+              <select class="custom-select d-block w-100">
+                <option value="">Choose...</option>
+                <option>option1</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select a valid option.
+              </div>
+            </div>
+          </div>
+          <form>
+            <div class="form-group">
+
+
+              <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="type">Type</label>
+                <input type="text" class="form-control"[(ngModel)]="type" name="type" placeholder="Enter the type">
+                <div class="invalid-feedback">
+                </div>
+              </div>
+            </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="description">Description</label>
+                  <textarea type="text" class="form-control" rows="5" [(ngModel)]="description" name="description" placeholder="Write a description of the product" ></textarea>
+                  <div class="invalid-feedback">
+                  </div>
+                </div>
+              </div>
+
+
+              <button class="btn btn-outline-primary" type="submit" value="Log in" (click)="add()">Submit New Product</button>
+
+              <div *ngIf="products?.length > 0;else noItems">
+                <ul>
+                  <li *ngFor="let prod of products; let i = index">
+                    {{ i + 1 }} - <br> Title - {{ prod.title }} <br> Type - {{ prod.type }} <br> Price - {{ prod.price }} <br> Description - {{ prod.description }}
+                    <i (click)="editable($event, prod)" class="fa fa-pencil"></i>
+                    <i *ngIf="editState && itemToEdit.id == prod.id" (click)="clear()" class="fa fa-compress"></i>
+                          <div *ngIf="editState && itemToEdit.id == prod.id">
+                    <form (ngSubmit)="update(prod)">
+                      <div class="row">
+                        <div class="input-field col s6">
+                          <input type="text" placeholder="Add Title" [(ngModel)]="prod.title" name="title">
+                        </div>
+                        <div class="input-field col s6">
+                          <input type="text" placeholder="Add Description" [(ngModel)]="prod.description" name="description">
+                        </div>
+                        <div class="input-field col s6">
+                          <input type="text" placeholder="Add Type" [(ngModel)]="prod.type" name="type">
+                        </div>
+                        <div class="input-field col s6">
+                          <input type="number" placeholder="Add Price" [(ngModel)]="prod.price" name="price">
+                        </div>
+                        <input type="submit" value="Update Item" class="btn orange">
+                        <button (click)="delete(prod)" class="btn red">Delete Item</button>
+                      </div>
+                    </form>
+                    </div>
+
+                  </li>
+                </ul>
+              </div>
+
+              <ng-template #noItems>
+                <hr>
+                <h5>There are no items to list</h5>
+              </ng-template>
+
+
+
+            </div>
+          </form>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
