@@ -6,8 +6,8 @@
   </tr>
 </ul>
 
-<div *ngIf="!authService.isAdmin"><br><br><h1 id="id1">Access denied</h1></div>
-<div *ngIf="authService.isAdmin">
+<!--<div *ngIf="!authService.isAdmin"><br><br><h1 id="id1">Access denied</h1></div>-->
+<!--<div *ngIf="authService.isAdmin">-->
 <div class="container">
 
 
@@ -107,16 +107,15 @@
                         <div class="input-field col s6">
                           <input type="number" placeholder="Add Price" [(ngModel)]="prod.price" name="price">
                         </div>
-                        <input type="submit" value="Update Item" class="btn orange">
-                        <button (click)="delete(prod)" class="btn red">Delete Item</button>
+
                       </div>
                     </form>
-                    </div>
-
+                          </div>
+                    <input type="submit" value="Update Item" class="btn orange">
+                    <button (click)="delete(prod)" class="btn red">Delete Item</button>
                   </li>
                 </ul>
               </div>
-
               <ng-template #noItems>
                 <hr>
                 <h5>There are no items to list</h5>
@@ -133,4 +132,4 @@
 
 
 
-</div>
+<!--</div>-->
