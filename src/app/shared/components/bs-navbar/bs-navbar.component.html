@@ -50,8 +50,66 @@
       </div>
     </ul>
     <form  class="form-inline my-2 my-lg-0" >
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <input #query
+      (keyup)="search(query.value)"
+       class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
 </nav>
+
+<data-table
+[items]="filteredProducts"
+[itemCount]="itemCount"
+(reload)="reloadfilteredProducts($event)"
+>
+<data-table-column
+[property]="'title'"
+[header]="'Title'"
+[sortable]="'true'"
+[resizable]="'true'"
+>
+</data-table-column>
+
+<data-table-column
+[property]="'price'"
+[header]="'Price'" 
+[sortable]="'true'"
+[resizable]="'true'"
+>
+<!-- <ng-template #dataTableCell let-item="filteredProducts">
+  {{ filteredProducts.price | currency:'USD' : true }}
+</ng-template> -->
+
+</data-table-column>
+
+<data-table-column
+
+[property]="'imageUrl'"
+[header]="'imageUrl'"
+[sortable]="'true'"
+[resizable]="'true'"
+>
+<p>HHHHHHHHHHHHHHHHHHHHHH</p>
+</data-table-column>
+
+<!-- <data-table-column
+  [property]="'$key'"
+  >
+  <ng-template #dataTableCell let-item="filteredProducts">
+    <a [routerLink]="['/admin/manage-products/',filteredProducts.$key]">Edit</a>
+  </ng-template>
+</data-table-column>  -->
+
+</data-table>
+<img src={{imageUrl}} width="50px">
+
+<ul>
+  <tr *ngFor="let person of filteredProducts; let i = index">
+    
+    <td>
+        <img src={{person.imageUrl}} width="50px">
+      Title - {{ person.title }} </td> <td>Type - {{ person.type }} </td>  <td>Price - {{ person.price }} </td> <td> Description - {{ person.description }} </td> <td>{{person.photo}} </td>
+    </tr>
+  </ul>
+  

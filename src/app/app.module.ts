@@ -31,6 +31,9 @@ import {PostService} from './shared/services/post.service';
 import {CategoryComponent} from './modules/admin/category/category.component';
 import {AddCategoriesComponent} from './modules/admin/add-categories/add-categories.component';
 
+
+import { DataTableModule } from 'angular5-data-table';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +51,7 @@ import {AddCategoriesComponent} from './modules/admin/add-categories/add-categor
 
   ],
   imports: [
+    DataTableModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,

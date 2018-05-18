@@ -3,6 +3,9 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import { Product } from '../../models/Product';
+import { PostService } from '../../services/post.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'bs-navbar',
@@ -17,7 +20,7 @@ export class BsNavbarComponent implements OnInit {
   public user_displayName: string;
   public sign_in: string;
 
-  constructor(public af: AngularFireAuth, private fm: FormBuilder, public authService: AuthService,
+  constructor(private postService: PostService, public af: AngularFireAuth, private fm: FormBuilder, public authService: AuthService,
               private fb: FormBuilder, private router: Router) {
     this.form = this.fm.group({
       'email' : ['', [Validators.required, Validators.email]],
@@ -37,8 +40,8 @@ export class BsNavbarComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-  }
+
+ 
 
   login(email: string, password: string) {
     return this.af.auth.signInWithEmailAndPassword(email, password)
@@ -71,5 +74,22 @@ export class BsNavbarComponent implements OnInit {
     }
     this.authService.loginWithEmail(this.form.controls.email.value, this.form.controls.password.value)
       .then(() => this.router.navigate(['/home']));
+  }
+
+
+  products: Product[];
+  filteredProducts: Product[];
+  subscription:Subscription;
+  ngOnInit() {
+    this.postService.getProducts().subscribe(products => {
+      this.products = products;
+    });
+  }
+
+  search(query: string){
+
+    this.filteredProducts = (query) ?
+    this.products.filter(p=>p.title.toLowerCase().includes(query.toLowerCase())):
+    null;
   }
 }
